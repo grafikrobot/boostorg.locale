@@ -10,7 +10,7 @@
 #
 globalenv={'B2_CI_VERSION': '1', 'B2_VARIANT': 'release'}
 
-def job(compiler, cxxstd, os, variant='', stdlib='', defines='', cxxflags='', linkflags='', asan=False, ubsan=False, tsan=False, install='', add_llvm=False, name='', arch='amd64', packages=None, buildtype='boost', buildscript='boost', environment={}, image=None, **kwargs):
+def job(compiler, cxxstd, os, variant='', stdlib='', defines='', cxxflags='', linkflags='', asan=False, ubsan=False, tsan=False, install='', add_llvm=False, name='', arch='amd64', packages=None, buildtype='boost', buildscript='drone', environment={}, image=None, **kwargs):
   if not name:
     name = compiler.replace('-', ' ')
     if stdlib:
