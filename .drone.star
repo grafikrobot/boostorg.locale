@@ -28,6 +28,9 @@ def main(ctx):
     job(compiler='clang-13',  cxxstd='11,14,17,20', os='freebsd-13.1'),
     job(compiler='clang-14',  cxxstd='11,14,17,20', os='freebsd-13.1'),
     job(compiler='clang-15',  cxxstd='11,14,17,20', os='freebsd-13.1'),
+    job(compiler='gcc-8',    cxxstd='11,14,17,20', os='freebsd-13.1', linkflags='-Wl,-rpath=/usr/local/lib/gcc8'),
+    job(compiler='gcc-9',    cxxstd='11,14,17,20', os='freebsd-13.1', linkflags='-Wl,-rpath=/usr/local/lib/gcc9'),
+    job(compiler='gcc-10',    cxxstd='11,14,17,20', os='freebsd-13.1', linkflags='-Wl,-rpath=/usr/local/lib/gcc10'),
     job(compiler='gcc-11',    cxxstd='11,14,17,20', os='freebsd-13.1', linkflags='-Wl,-rpath=/usr/local/lib/gcc11'),
   ]
 
