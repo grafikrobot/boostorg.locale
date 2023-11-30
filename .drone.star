@@ -10,29 +10,27 @@
 #
 globalenv={'B2_CI_VERSION': '1', 'B2_VARIANT': 'release'}
 
-# Wrapper function to apply the globalenv to all jobs
-def job(
-        # job specific environment options
-        env={},
-        **kwargs):
-  real_env = dict(globalenv)
-  real_env.update(env)
-  return job_impl(env=real_env, **kwargs)
-
 def main(ctx):
-  return [
-    # FreeBSD
-    job(compiler='clang-10',  cxxstd='11,14,17,20', os='freebsd-13.1'),
-    job(compiler='clang-11',  cxxstd='11,14,17,20', os='freebsd-13.1'),
-    job(compiler='clang-12',  cxxstd='11,14,17,20', os='freebsd-13.1'),
-    job(compiler='clang-13',  cxxstd='11,14,17,20', os='freebsd-13.1'),
-    job(compiler='clang-14',  cxxstd='11,14,17,20', os='freebsd-13.1'),
-    job(compiler='clang-15',  cxxstd='11,14,17,20', os='freebsd-13.1'),
-    job(compiler='gcc-8',    cxxstd='11,14,17,20', os='freebsd-13.1', linkflags='-Wl,-rpath=/usr/local/lib/gcc8'),
-    job(compiler='gcc-9',    cxxstd='11,14,17,20', os='freebsd-13.1', linkflags='-Wl,-rpath=/usr/local/lib/gcc9'),
-    job(compiler='gcc-10',    cxxstd='11,14,17,20', os='freebsd-13.1', linkflags='-Wl,-rpath=/usr/local/lib/gcc10'),
-    job(compiler='gcc-11',    cxxstd='11,14,17,20', os='freebsd-13.1', linkflags='-Wl,-rpath=/usr/local/lib/gcc11'),
-  ]
+
+  return generate(
+        # Compilers
+        ['gcc >=8.0',
+         'clang >=10',
+         # 'msvc >=14.1',
+         'arm64-gcc latest',
+         's390x-gcc latest',
+         'freebsd-gcc latest',
+         'apple-clang latest',
+         'arm64-clang latest',
+         # 's390x-clang latest',
+         'freebsd-clang latest',
+         # 'x86-msvc latest'
+        ],
+        # Standards
+        '>=11',
+        docs=False, ubsan=False, asan=False
+  )
+
 
 # from https://github.com/boostorg/boost-ci
-load("@boost_ci//ci/drone/:functions.star", "linux_cxx", "windows_cxx", "osx_cxx", "freebsd_cxx", "job_impl")
+load("@ci_automation//ci/drone/:functions.star", "linux_cxx","windows_cxx","osx_cxx","freebsd_cxx", "generate")
