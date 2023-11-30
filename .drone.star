@@ -20,10 +20,10 @@ def main(ctx):
          'arm64-gcc latest',
          's390x-gcc latest',
          'freebsd-gcc latest',
+         'freebsd-clang >=12',
          'apple-clang latest',
          'arm64-clang latest',
          # 's390x-clang latest',
-         'freebsd-clang latest',
          # 'x86-msvc latest'
         ],
         # Standards
